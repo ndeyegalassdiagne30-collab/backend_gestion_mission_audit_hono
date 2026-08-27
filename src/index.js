@@ -783,7 +783,7 @@ app.doc('/doc', {
   },
   servers: [
     {
-      url: `http://localhost:${port}`,
+      url: `https://backend-gestion-mission-audit-hono.onrender.com`,
       description: 'Serveur local',
     },
   ],
@@ -799,6 +799,7 @@ app.get('/', (c) => {
 });
 
 console.log(`Serveur lancé sur http://localhost:${port}`);
+// console.log("Serveur lancé sur :https://backend-gestion-mission-audit-hono.onrender.com/");
 console.log(`Swagger UI : http://localhost:${port}/ui`);
 
 // Exporté pour que les tests puissent fermer le serveur en fin d'exécution.
