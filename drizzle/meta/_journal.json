@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1786388546567,
+      "tag": "0000_cloudy_bloodaxe",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1786397469243,
+      "tag": "0001_military_leech",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786549174527,
+      "tag": "0002_index_cles_etrangeres",
+      "breakpoints": true
+    }
+  ]
+}

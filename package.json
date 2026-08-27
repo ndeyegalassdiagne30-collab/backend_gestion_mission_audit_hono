@@ -1,0 +1,42 @@
+{
+  "name": "backend_gestion_mission_audit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "seed": "node src/db/seed.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndeyegalassdiagne30-collab/backend_gestion_mission_audit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ndeyegalassdiagne30-collab/backend_gestion_mission_audit/issues"
+  },
+  "homepage": "https://github.com/ndeyegalassdiagne30-collab/backend_gestion_mission_audit#readme",
+  "dependencies": {
+    "@hono/node-server": "^2.1.0",
+    "@hono/swagger-ui": "^0.6.1",
+    "@hono/zod-openapi": "^1.5.1",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "hono": "^4.9.0",
+    "postgres": "^3.4.9",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.10"
+  }
+}

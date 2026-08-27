@@ -1,0 +1,547 @@
+{
+  "id": "a7754d33-9f59-4100-b51c-49ea2e22d15a",
+  "prevId": "9eab09a7-17de-4d9b-8ad0-9a958f664f3d",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.clients": {
+      "name": "clients",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "raison_sociale": {
+          "name": "raison_sociale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ninea": {
+          "name": "ninea",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "adresse": {
+          "name": "adresse",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telephone": {
+          "name": "telephone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_creation": {
+          "name": "date_creation",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "statut": {
+          "name": "statut",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'actif'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "clients_ninea_unique": {
+          "name": "clients_ninea_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "ninea"
+          ]
+        },
+        "clients_email_unique": {
+          "name": "clients_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        },
+        "clients_telephone_unique": {
+          "name": "clients_telephone_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "telephone"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.documents": {
+      "name": "documents",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "titre": {
+          "name": "titre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nom_fichier": {
+          "name": "nom_fichier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chemin": {
+          "name": "chemin",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "date_upload": {
+          "name": "date_upload",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "taille": {
+          "name": "taille",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mission_id": {
+          "name": "mission_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "utilisateur_id": {
+          "name": "utilisateur_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "documents_mission_id_missions_id_fk": {
+          "name": "documents_mission_id_missions_id_fk",
+          "tableFrom": "documents",
+          "tableTo": "missions",
+          "columnsFrom": [
+            "mission_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "documents_utilisateur_id_utilisateurs_id_fk": {
+          "name": "documents_utilisateur_id_utilisateurs_id_fk",
+          "tableFrom": "documents",
+          "tableTo": "utilisateurs",
+          "columnsFrom": [
+            "utilisateur_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.journaux_activites": {
+      "name": "journaux_activites",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "action": {
+          "name": "action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_action": {
+          "name": "date_action",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "utilisateur_id": {
+          "name": "utilisateur_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "journaux_activites_utilisateur_id_utilisateurs_id_fk": {
+          "name": "journaux_activites_utilisateur_id_utilisateurs_id_fk",
+          "tableFrom": "journaux_activites",
+          "tableTo": "utilisateurs",
+          "columnsFrom": [
+            "utilisateur_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.mission_auditeurs": {
+      "name": "mission_auditeurs",
+      "schema": "",
+      "columns": {
+        "mission_id": {
+          "name": "mission_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "auditeur_id": {
+          "name": "auditeur_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "mission_auditeur_unique": {
+          "name": "mission_auditeur_unique",
+          "columns": [
+            {
+              "expression": "mission_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "auditeur_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "mission_auditeurs_mission_id_missions_id_fk": {
+          "name": "mission_auditeurs_mission_id_missions_id_fk",
+          "tableFrom": "mission_auditeurs",
+          "tableTo": "missions",
+          "columnsFrom": [
+            "mission_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "mission_auditeurs_auditeur_id_utilisateurs_id_fk": {
+          "name": "mission_auditeurs_auditeur_id_utilisateurs_id_fk",
+          "tableFrom": "mission_auditeurs",
+          "tableTo": "utilisateurs",
+          "columnsFrom": [
+            "auditeur_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.missions": {
+      "name": "missions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "titre": {
+          "name": "titre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "date_debut": {
+          "name": "date_debut",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_fin_prevue": {
+          "name": "date_fin_prevue",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_fin_reelle": {
+          "name": "date_fin_reelle",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avancement": {
+          "name": "avancement",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "statut": {
+          "name": "statut",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'en_cours'"
+        },
+        "date_creation": {
+          "name": "date_creation",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "client_id": {
+          "name": "client_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expert_comptable_id": {
+          "name": "expert_comptable_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "missions_client_id_clients_id_fk": {
+          "name": "missions_client_id_clients_id_fk",
+          "tableFrom": "missions",
+          "tableTo": "clients",
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "missions_expert_comptable_id_utilisateurs_id_fk": {
+          "name": "missions_expert_comptable_id_utilisateurs_id_fk",
+          "tableFrom": "missions",
+          "tableTo": "utilisateurs",
+          "columnsFrom": [
+            "expert_comptable_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.utilisateurs": {
+      "name": "utilisateurs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nom": {
+          "name": "nom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prenom": {
+          "name": "prenom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mot_de_passe": {
+          "name": "mot_de_passe",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "telephone": {
+          "name": "telephone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "photo": {
+          "name": "photo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "date_creation": {
+          "name": "date_creation",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "statut": {
+          "name": "statut",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'actif'"
+        },
+        "client_id": {
+          "name": "client_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "utilisateurs_client_id_clients_id_fk": {
+          "name": "utilisateurs_client_id_clients_id_fk",
+          "tableFrom": "utilisateurs",
+          "tableTo": "clients",
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "utilisateurs_email_unique": {
+          "name": "utilisateurs_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        },
+        "utilisateurs_telephone_unique": {
+          "name": "utilisateurs_telephone_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "telephone"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
